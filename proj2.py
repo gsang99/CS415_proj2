@@ -18,17 +18,17 @@ def parse(filename):
     return clients
 
 #constructing a DAG
-def DAG():
-    # n = length(clients)
-    # START = 0
-    # END = n + 1
+def DAG(clients):
+    n = len(clients)  # n = length(clients)
+    START = 0 # START = 0
+    END = n + 1 # END = n + 1
 
-    # adj = list of n+2 empty lists          // adj[u] holds (neighbor, weight) pairs
-    # hasIncoming = list of n+2 falses
+    adj = [[] for _ in range(n + 2)]  # adj = list of n+2 empty lists          // adj[u] holds (neighbor, weight) pairs
+    hasIncoming = [False] * (n + 2)  # hasIncoming = list of n+2 falses
 
-    # // Step 1: client-to-client edges
-    # for i = 1 to n:
-    #     (si, ei, ri) = clients[i-1]
+    # client-to-client edges
+    for i in range(1, n + 1):  # for i = 1 to n:
+        si, ei, ri = clients[i - 1]  # (si, ei, ri) = clients[i-1]
     #     for j = 1 to n:
     #         (sj, ej, rj) = clients[j-1]
     #         if i != j and ei <= sj:
