@@ -45,7 +45,41 @@ def buildDAG(clients):
 
     # return adj, START, END
     return adj, START, END
+
+#computing the optimal path
+def computeOptimalPath(adj, START, END):
+    #optimal path from start to end vertex can be computer very fast as follows
+
+    #bullet 1: recurrence we already know
+        #F(vi) = wi + max F(of each neighbor)
+        # the best you can earn from vertex vi to end is the weight of
+        #the edge leaving vi, plus the best result among all the vertices
+        #you could go to next
     
+    #peusdo code:
+    #for the sort list i start from the end and iterate backwards from end to start
+        #at each vertex fill in F and opt
+        #
+    #bullet 2: the opt pointer
+        #while computing the max, you also remember which neighbor won
+        #thats what arg means: max operation gives you a value and arg 
+        #gives you the identity of whatever produced it
+        #opt[vi] = next vertex to move from to vi if i want the best outcome
+        #you fill in opt at the same time as F, in the same loop
+        #fill in opt at the same time as f in the same loop for each vertex
+    #Bullet 3: following the pointers.
+        # Once F and opt are filled in for every vertex, the best path is just a chain:
+
+        # Start at opt[Start]. That’s the first client in the optimal set.
+        # Look up opt of that client. That’s the next client.
+        # Keep going until you reach End, then stop.
+
+        # Each vertex you visit along the way (excluding Start and End, which aren’t real clients) is one client in the optimal set.
+
+        # Why it works: F[Start] was built from the best choice at every step, so following 
+        # those same best choices from the top retraces the winning path. 
+        # No searching or recomputing is needed, just lookups, which is why the spec calls it “very fast.”
+    pass
     
     
 
