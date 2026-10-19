@@ -1,5 +1,5 @@
 #this is where the magic happens
-
+from collections import deque
 #parsing the input file
 def parse(filename):
     file = open(filename)
@@ -45,9 +45,35 @@ def buildDAG(clients):
 
     # return adj, START, END
     return adj, START, END
+
+def sourceRemoval(adj):
+    #building in degree counts
+    degreeCount = [0] * len(adj)
+    removalQueue = deque()
+    topologicalSequence = []
+
+    #update the in degree counts
+    for i in range(len(adj)):
+        for neighbor, weight in adj[i]:
+            degreeCount[neighbor] += 1 
     
-    
-    
+    #putting start in removal queue
+    for i in range(len(degreeCount)):
+        if degreeCount[i] == 0:
+            removalQueue.append(i)
+    #the source removal part
+    while removalQueue:  
+        vertex = removalQueue.popleft() #save vertex but remove node from removalQueue
+        topologicalSequence.append(vertex)
+        #iterate through adjacency list and update in degree counts after removing vertex
+        for neighbor, weight in adj[vertex]:
+            degreeCount[neighbor] -= 1
+            #if any vertexs in degree becomes 0 add to removalQueue
+            if degreeCount[neighbor] == 0:
+                removalQueue.append(neighbor)
+    print("\nTopological Sequence: \n")
+    print(topologicalSequence)
+    return topologicalSequence      
 
 def main():
     # Your code to construct a Directed Acyclic Graph (DAG) goes here
@@ -76,6 +102,7 @@ def main():
         print("Start edges:", [nbr for nbr, w in adj[START]])
         print()
 
+        topologicalSequence = sourceRemoval(adj)
     
     pass
 
