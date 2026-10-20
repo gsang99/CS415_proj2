@@ -165,7 +165,10 @@ def main():
     #get max revenue and client order
     maxRevenue, clientOrder = computeOptimalPath(adj,topologicalSequence, START, END)
     outputData(outFile, len(clients), maxRevenue, clientOrder)
-    pass
+    print(f"There are {len(clients)} clients in this file\n")
+    print(f"Optimal revenue earned is {maxRevenue}")
+    print(f"Clients contributing to this optimal revenue: {', '.join(map(str, clientOrder))}")
+    
 
 if __name__ == "__main__":
     main()
