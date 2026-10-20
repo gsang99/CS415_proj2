@@ -163,6 +163,7 @@ def main():
     adj, START, END = buildDAG(clients)
     topologicalSequence = sourceRemoval(adj)
     #get max revenue and client order
+    maxRevenue, clientOrder = computeOptimalPath(adj,topologicalSequence, START, END)
     outputData(outFile, len(clients), maxRevenue, clientOrder)
     pass
 
