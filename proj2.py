@@ -75,6 +75,15 @@ def sourceRemoval(adj):
     print(topologicalSequence)
     return topologicalSequence      
 
+def outputData(filename, numclients, maxRevenue, path):
+    clientPath = ', '.join(map(str, path))
+    with open(filename, 'w') as file:
+        print(f"There are {numclients} clients in this file\n", file=file)
+        print(f"Optimal revenue earned is {maxRevenue}", file=file)
+        print(f"Clients contributing to this optimal revenue: {clientPath}", file=file)
+
+    return
+
 
 
 #computing the optimal path
@@ -127,7 +136,7 @@ def main():
     # print (adj, START, END)
     #build the DAG using the clients list and print the adjacency list, START, and END nodes
 
-
+    '''
     for filename in ["data1.txt", "data2.txt"]:
         print("=== Testing", filename, "===")
 
@@ -148,11 +157,8 @@ def main():
         print()
 
         topologicalSequence = sourceRemoval(adj)
-        maxRev, path = computeOptimalPath(adj,topologicalSequence, START, END)
-        print("Maximum revenue:", maxRev)
-        print("Clients:", path)
     
-    
+    pass
 
 if __name__ == "__main__":
     main()
