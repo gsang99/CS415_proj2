@@ -71,8 +71,6 @@ def sourceRemoval(adj):
             #if any vertexs in degree becomes 0 add to removalQueue
             if degreeCount[neighbor] == 0:
                 removalQueue.append(neighbor)
-    print("\nTopological Sequence: \n")
-    print(topologicalSequence)
     return topologicalSequence      
 
 def outputData(filename, numclients, maxRevenue, path):
