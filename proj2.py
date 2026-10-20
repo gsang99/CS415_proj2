@@ -155,9 +155,15 @@ def main():
         print("End has no outgoing edges:", adj[END] == [])
         print("Start edges:", [nbr for nbr, w in adj[START]])
         print()
-
-        topologicalSequence = sourceRemoval(adj)
+    '''
     
+    filename = input("Enter the file to read data: ")
+    outFile = "out" + filename
+    clients = parse(filename)
+    adj, START, END = buildDAG(clients)
+    topologicalSequence = sourceRemoval(adj)
+    #get max revenue and client order
+    outputData(outFile, len(clients), maxRevenue, clientOrder)
     pass
 
 if __name__ == "__main__":
