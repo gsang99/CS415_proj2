@@ -75,6 +75,15 @@ def sourceRemoval(adj):
     print(topologicalSequence)
     return topologicalSequence      
 
+def outputData(filename, numclients, maxRevenue, path):
+    clientPath = ', '.join(map(str, path))
+    with open(filename, 'w') as file:
+        print(f"There are {numclients} clients in this file\n", file=file)
+        print(f"Optimal revenue earned is {maxRevenue}", file=file)
+        print(f"Clients contributing to this optimal revenue: {clientPath}", file=file)
+
+    return
+
 def main():
     # Your code to construct a Directed Acyclic Graph (DAG) goes here
     # clients = parse("data1.txt")
@@ -82,7 +91,7 @@ def main():
     # print (adj, START, END)
     #build the DAG using the clients list and print the adjacency list, START, and END nodes
 
-
+    '''
     for filename in ["data1.txt", "data2.txt"]:
         print("=== Testing", filename, "===")
 
@@ -101,9 +110,15 @@ def main():
         print("End has no outgoing edges:", adj[END] == [])
         print("Start edges:", [nbr for nbr, w in adj[START]])
         print()
-
-        topologicalSequence = sourceRemoval(adj)
+    '''
     
+    filename = input("Enter the file to read data: ")
+    outFile = "out" + filename
+    clients = parse(filename)
+    adj, START, END = buildDAG(clients)
+    topologicalSequence = sourceRemoval(adj)
+    #get max revenue and client order
+    outputData(outFile, len(clients), maxRevenue, clientOrder)
     pass
 
 if __name__ == "__main__":
